@@ -1,0 +1,357 @@
+ /* ================== RESET ================== */
+* { box-sizing: border-box; margin:0; padding:0; }
+
+/* ================== BODY ================== */
+body {
+  font-family:"SF Pro Display", Arial, sans-serif;
+  padding-top:130px;
+  min-height:100vh;
+  color:#0f4c4c; /* Dark teal */
+  background:linear-gradient(rgb(1, 27, 88), rgb(1, 27, 88)), repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0px, rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 40px);
+}
+
+/* ================== NAVBAR ================== */
+.top-bar {
+  position:fixed; top:14px; left:50%; transform:translateX(-50%);
+  width:calc(100% - 24px); display:flex; align-items:center; justify-content:space-between;
+  padding:14px 18px;
+  background: rgba(255, 255, 255, 0.939);
+  backdrop-filter: blur(3px) saturate(300%);
+  border-radius:28px;
+  border:1px solid rgba(159, 159, 160, 0.25);
+  z-index:1000; transition: all 0.4s ease;
+}
+
+
+.menu-icon { display:flex; align-items:center; gap:10px; }
+.menu-icon img { width:50px; height:50px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2)); }
+.logo { font-size:17px; margin-right: 50px; font-weight:600; letter-spacing:0.4px; color:#0f4c4c; text-shadow:0 1px 6px rgba(0,0,0,0.05); }
+
+.user-area { background: rgba(255,255,255,0.2); border-radius:14px; padding:8px 12px; backdrop-filter:blur(18px); border:1px solid rgba(255,255,255,0.3); }
+.user-area .material-symbols-outlined { color:#0f4c4c; font-size:17px; }
+
+.sub-nav-links { display:flex; gap:10px; }
+.sub-nav-links a { text-decoration:none; padding:8px 14px; font-size:13px; font-weight:500; color:#0f4c4c; background: rgba(255,255,255,0.2); border-radius:16px; backdrop-filter: blur(18px); border:1px solid rgba(255,255,255,0.25); transition: all 0.35s ease, box-shadow 0.4s ease; }
+.sub-nav-links a:hover, .sub-nav-links a.active {color: white;background: linear-gradient(120deg, rgb(138, 167, 255), rgb(81, 113, 255), #5689fff5); box-shadow:0 10px 30px rgba(175, 176, 255, 0.5),0 0 12px rgba(200, 201, 255, 0.3); }
+
+
+@media(max-width:768px){.top-bar{flex-direction:column;gap:12px}.mobile-user{display:flex;position:absolute;top:14px;right:18px}.desktop-user{display:none}.sub-nav-links{width:100%;justify-content:center;padding-top:6px;border-top:1px solid rgba(255,255,255,0.25);}}
+
+.ranking-section{padding:40px 16px;}
+.ranking-container{max-width:420px;margin:auto;}
+
+/* ================== VOTING CARD ================== */
+.contest-card{
+  background-color: white;
+  backdrop-filter: blur(28px) saturate(160%);
+  border-radius:30px; border:1px solid rgba(175,255,255,0.25);
+  box-shadow: rgb(78, 255, 255);
+  overflow:hidden; transition:transform 0.3s ease, box-shadow 0.3s ease;
+}
+.contest-card:hover{
+  transform:translateY(-5px); 
+  box-shadow:0 30px 70px rgba(175,255,255,0.35), inset 0 1px 0 rgba(255,255,255,0.25);
+}
+
+/* SLIDER */
+.slider{position:relative;width:100%;height:380px;overflow:hidden;}
+.slider img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.35s ease;filter:contrast(1.05) saturate(1.1);}
+.slider::after{content:"";position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.05), transparent 60%);pointer-events:none;}
+
+.slider-dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;}
+.slider-dots span{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,0.5);cursor:pointer;}
+.slider-dots span.active{background:#ffffff;transform:scale(1.25);}
+
+/* ================== CARD BODY ================== */
+.card-body { padding: 22px 18px; color: #0f4c4c; height: 200px; }
+
+/* ===== NAME + RANK ===== */
+.name-pair {
+  display: flex;
+  align-items: center;
+  margin-top: 2px;
+  margin-bottom: 20px;
+}
+
+.left-name { flex: 1; font-size: 18px; font-weight: 600;}
+
+/* ===== RANK CIRCLE ===== */
+.rank-badge {
+  margin-left: 10%;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(150deg, #598bfff5,#0036b4f5, #00174cf5);
+  color: white;
+  font-size: 22px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 6px 20px #0036b4f5, inset 0 2px 0 rgba(255, 255, 255, 0.393);
+}
+
+.rank-badge-floating { animation: float 3s ease-in-out infinite; }
+@keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-4px);} }
+
+/* ================== VOTE BUTTON ================== */
+.votebutton {
+  position: relative; 
+  margin-top: 10%;      /* Relative inside card body */
+  height: 70px;
+  margin-left: 17%;             /* Space for button */
+}
+.vote1 {
+  position: relative;       /* Relative inside card body */
+  width: 80%;             /* Make it responsive on mobile */
+  max-width: 250px;         /* Optional max width */
+  height: 50px;
+  border-radius: 25px;
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #0036b4f5, #00174cf5);
+  border: none;
+  cursor: pointer;
+  display: block;           /* Center horizontally */
+  margin: auto;             /* Center horizontally */
+  bottom: 0;                /* Stick to bottom of card body */
+  position: absolute;       /* Absolutely inside card body */
+}
+
+/* Disabled state */
+.vote1:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+/* DIVIDER */
+.card-divider{
+  height:2px;
+  width:100%;
+  margin:20px 0;
+  border-radius:2px;
+  background-color:rgb(82, 119, 255);
+}
+
+/* ================== LOGO ================== */
+.logo {
+  font-weight: 600;
+  color: #0f4c4c; 
+  text-shadow: 0 0 4px rgb(255, 255, 255),
+               0 0 8px rgb(255, 255, 255),
+               0 0 12px rgb(255, 255, 255);
+}
+
+
+/* LOGIN MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 10px;
+}
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+.modal-actions {
+  display: flex;
+  justify-content: space-between; /* Horizontally align buttons */
+  gap: 10px; /* Add some space between buttons */
+  margin-top: 20px; /* Add space above the buttons */
+}
+.modal-actions button {
+  width: 48%; /* Make buttons nearly equal in size */
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px; /* Slight rounding for a smoother look */
+  cursor: pointer;
+}
+
+/* LOGIN BUTTON STYLE */
+#loginSubmit {
+  background-color: rgb(41, 0, 244); /* White background */
+  color: #ffffff; /* Green text */
+  border: 2px solid #28a745; /* Blue border */
+  transition: all 0.3s ease; /* Smooth hover effect */
+}
+#loginSubmit:hover {
+  background-color: #f0f0f0; /* Light grey hover effect */
+}
+
+/* CANCEL BUTTON STYLE */
+#closeLogin {
+  background-color: #f1f1f1; /* Light grey background */
+  color: #333; /* Dark text */
+  border: 2px solid #ccc; /* Light border for cancel button */
+  transition: all 0.3s ease; /* Smooth hover effect */
+}
+#closeLogin:hover {
+  background-color: #e0e0e0; /* Slightly darker grey on hover */
+}
+
+#confirmVote, #loginSubmit { background-color: #0037ff; color: rgb(255, 255, 255); }
+#cancelVote, #closeLogin { background-color: #bebebe; color: white; }
+#loginCode { width:100%; padding:12px; border-radius:8px; border:1px solid #ccc; margin-bottom:12px; font-size:16px; }
+#errorLogin { color:red; font-size:14px; display:none; margin-bottom:10px; }
+
+/* LOADING ANIMATION: bouncing dots */
+/* Loader dots for processing */
+.loading-animation div {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 0 3px;
+  background: #007bff;
+  border-radius: 50%;
+  animation: bounce 0.6s infinite alternate;
+}
+.loading-animation div:nth-child(2) { animation-delay: 0.1s; }
+.loading-animation div:nth-child(3) { animation-delay: 0.2s; }
+.loading-animation div:nth-child(4) { animation-delay: 0.3s; }
+.loading-animation div:nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}
+
+/* Success particle-burst */
+.success {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkmark {
+  width: 100px;
+  height: 100px;
+}
+
+.checkmark-circle {
+  stroke: #28a745;
+  stroke-width: 4;
+  stroke-dasharray: 157; /* 2πr ~ 2*3.14*25 */
+  stroke-dashoffset: 157;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  animation: drawCircle 0.6s ease-out forwards;
+}
+
+
+
+@keyframes drawCircle {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes drawCheck {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Particles */
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #28a745;
+  border-radius: 50%;
+  opacity: 0;
+  animation: fly 0.8s forwards;
+}
+
+@keyframes fly {
+  0% { transform: translate(0,0) scale(1); opacity:1; }
+  80% { opacity:1; }
+  100% { transform: translate(var(--x), var(--y)) scale(0); opacity:0; }
+}
+
+/* Optional: multiple colors for confetti */
+.particle.color1 { background: #28a745; }
+.particle.color2 { background: #ffd700; }
+.particle.color3 { background: #ff4500; }
+.particle.color4 { background: #00bfff; }
+.particle.color5 { background: #ff69b4; }
+
+#successVoteModal .modal-content {
+  background: #28a745;
+  color: white;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+#successVoteText {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+/* Modal style */
+.success-modal-content {
+  background: #28a745;
+  color: rgb(0, 131, 37);
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+.shiny-star {
+  font-size: 40px;
+  color: #ffd700; /* Gold color for the star */
+  animation: shine 1.5s ease-in-out infinite;
+}
+
+/* Shiny star animation */
+@keyframes shine {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+/* Success Modal */
+.modal {
+  display: none; /* Initially hidden */
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}

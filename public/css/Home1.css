@@ -1,0 +1,114 @@
+ /* ================== RESET ================== */
+* { box-sizing: border-box; margin:0; padding:0; }
+
+/* ================== BODY ================== */
+body {
+  font-family:"SF Pro Display", Arial, sans-serif;
+  padding-top:130px;
+  min-height:100vh;
+  color:#0f4c4c; /* Dark teal */
+  background:linear-gradient(rgb(1, 27, 88), rgb(1, 27, 88)), repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0px, rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 40px);
+}
+
+/* ================== NAVBAR ================== */
+.top-bar {
+  position:fixed; top:14px; left:50%; transform:translateX(-50%);
+  width:calc(100% - 24px); display:flex; align-items:center; justify-content:space-between;
+  padding:14px 18px;
+  background: rgba(255, 255, 255, 0.939);
+  backdrop-filter: blur(3px) saturate(300%);
+  border-radius:28px;
+  border:1px solid rgba(159, 159, 160, 0.25);
+  z-index:1000; transition: all 0.4s ease;
+}
+
+.menu-icon { display:flex; align-items:center; gap:10px; }
+.menu-icon img { width:50px; height:50px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2)); }
+.logo { font-size:17px; margin-right: 50px; font-weight:600; letter-spacing:0.4px; color:#0f4c4c; text-shadow:0 1px 6px rgba(0,0,0,0.05); }
+
+.user-area { background: rgba(255,255,255,0.2); border-radius:14px; padding:8px 12px; backdrop-filter:blur(18px); border:1px solid rgba(255,255,255,0.3); }
+.user-area .material-symbols-outlined { color:#0f4c4c; font-size:17px; }
+
+.sub-nav-links { display:flex; gap:10px; }
+.sub-nav-links a { text-decoration:none; padding:8px 14px; font-size:13px; font-weight:500; color:#0f4c4c; background: rgba(255,255,255,0.2); border-radius:16px; backdrop-filter: blur(18px); border:1px solid rgba(255,255,255,0.25); transition: all 0.35s ease, box-shadow 0.4s ease; }
+.sub-nav-links a:hover, .sub-nav-links a.active {color: white;background: linear-gradient(120deg, rgb(138, 167, 255), rgb(81, 113, 255), #5689fff5); box-shadow:0 10px 30px rgba(175, 176, 255, 0.5),0 0 12px rgba(200, 201, 255, 0.3); }
+
+
+@media(max-width:768px){.top-bar{flex-direction:column;gap:12px}.mobile-user{display:flex;position:absolute;top:14px;right:18px}.desktop-user{display:none}.sub-nav-links{width:100%;justify-content:center;padding-top:6px;border-top:1px solid rgba(255,255,255,0.25);}}
+
+.ranking-section{padding:40px 16px;}
+.ranking-container{max-width:420px;margin:auto;}
+
+/* ================== VOTING CARD ================== */
+.contest-card{
+  background-color: white;
+  backdrop-filter: blur(28px) saturate(160%);
+  border-radius:30px; border:1px solid rgba(175,255,255,0.25);
+  box-shadow: rgb(78, 255, 255);
+  overflow:hidden; transition:transform 0.3s ease, box-shadow 0.3s ease;
+}
+/* SLIDER */
+.slider{position:relative;width:100%;height:380px;overflow:hidden;}
+.slider img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.35s ease;filter:contrast(1.05) saturate(1.1);}
+.slider::after{content:"";position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.05), transparent 60%);pointer-events:none;}
+
+.slider-dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;}
+.slider-dots span{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,0.5);cursor:pointer;}
+.slider-dots span.active{background:#c0ffff;transform:scale(1.25);}
+
+/* CARD BODY */
+.card-body { padding: 22px 18px; color: #0f4c4c; height: 200px; }
+.name-pair{display:flex;justify-content:space-between;font-size:16px;font-weight:600;margin-bottom:20px;text-shadow:0 1px 3px rgba(0,0,0,0.05);color:#0f4c4c;}
+.rank-badge {
+    width: 60px;
+    height: 60px;
+    margin: auto;
+    border-radius: 50%;
+    background: linear-gradient(150deg, #598bfff5,#0036b4f5, #00174cf5);
+    color: white;
+    font-size: 22px;
+    font-weight: 900;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    /* subtle floating effect */
+    box-shadow: 0 6px 20px #0036b4f5, inset 0 2px 0 rgba(255, 255, 255, 0.393);
+    transition: transform 1s ease, box-shadow 1s ease;
+}
+
+.rank-badge-floating {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+.name-pair {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.left-name .right-name {
+  flex: 1;
+  font-size: 20px;
+  font-weight: 600;
+  margin-left: 42%;
+  
+}
+
+.logo {
+  font-weight: 900;
+  font-size: 15px;
+  color: #000000; /* main text color */
+  text-shadow: 
+    0 0 4px rgb(255, 255, 255),
+    0 0 8px rgb(255, 255, 255),
+    0 0 12px rgb(255, 255, 255);
+}
+
+
+

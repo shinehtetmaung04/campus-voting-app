@@ -1,0 +1,107 @@
+1️⃣ Database Structure (Example)
+
+Assume you have a votes table like this:
+
+votes
+-------------------------
+id
+user_id
+candidate_name
+category   (king / queen)
+created_at
+
+
+Each row = 1 vote
+
+2️⃣ Controller: Get Vote Counts from DB
+
+Create or use an Admin controller:
+
+php artisan make:controller AdminController
+
+AdminController.php
+use Illuminate\Support\Facades\DB;
+
+class AdminController extends Controller
+{
+    public function dashboard()
+    {
+        // King votes
+        $kingVotes = DB::table('votes')
+            ->select('candidate_name', DB::raw('COUNT(*) as total'))
+            ->where('category', 'king')
+            ->groupBy('candidate_name')
+            ->get();
+
+        // Queen votes
+        $queenVotes = DB::table('votes')
+            ->select('candidate_name', DB::raw('COUNT(*) as total'))
+            ->where('category', 'queen')
+            ->groupBy('candidate_name')
+            ->get();
+
+        return view('admin.dashboard', compact('kingVotes', 'queenVotes'));
+    }
+}
+
+3️⃣ Route
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
+
+4️⃣ Blade View: Pass Data to Chart.js
+Convert Laravel data → JavaScript
+
+Replace your static JS with this 👇
+
+King Chart
+<script>
+const kingLabels = @json($kingVotes->pluck('candidate_name'));
+const kingData = @json($kingVotes->pluck('total'));
+
+new Chart(document.getElementById('kingChart'), {
+    type: 'bar',
+    data: {
+        labels: kingLabels,
+        datasets: [{
+            label: 'Votes',
+            data: kingData,
+            backgroundColor: '#3b82f6'
+        }]
+    },
+    options: {
+        indexAxis: 'y',
+        responsive: true,
+        scales: {
+            x: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+
+Queen Chart
+<script>
+const queenLabels = @json($queenVotes->pluck('candidate_name'));
+const queenData = @json($queenVotes->pluck('total'));
+
+new Chart(document.getElementById('queenChart'), {
+    type: 'bar',
+    data: {
+        labels: queenLabels,
+        datasets: [{
+            label: 'Votes',
+            data: queenData,
+            backgroundColor: '#ec4899'
+        }]
+    },
+    options: {
+        indexAxis: 'y',
+        responsive: true,
+        scales: {
+            x: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>

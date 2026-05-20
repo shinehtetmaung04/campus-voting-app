@@ -1,0 +1,241 @@
+/* ================= RESET ================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ================= BODY ================= */
+body {
+  font-family: "SF Pro Display", Arial, sans-serif;
+  padding-top: 150px;
+  min-height: 100vh;
+  color: #0f4c4c;
+  background: #011b58;
+}
+
+/* ================= TOP BAR ================= */
+.top-bar {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 24px);
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(8px);
+  border-radius: 28px;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.menu-icon {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.menu-icon img {
+  width: 50px;
+  height: 50px;
+}
+
+.logo {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f4c4c;
+}
+
+.event-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f4c4c;
+  text-align: center;
+}
+
+.sub-nav-links {
+  display: flex;
+  gap: 10px;
+}
+
+.sub-nav-links a {
+  text-decoration: none;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #0f4c4c;
+  background: rgba(255,255,255,0.4);
+  border-radius: 16px;
+  transition: 0.3s;
+}
+
+.sub-nav-links a.active,
+.sub-nav-links a:hover {
+  color: white;
+  background: linear-gradient(120deg, #8aa7ff, #5171ff);
+}
+
+/* ================= CARD ================= */
+.ranking-section {
+  padding: 40px 16px;
+}
+
+.ranking-container {
+  max-width: 420px;
+  margin: auto;
+}
+
+.contest-card {
+  background: white;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.slider {
+  position: relative;
+  height: 380px;
+  overflow: hidden;
+}
+
+.slider img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.slider-dots {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.slider-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+}
+
+.slider-dots span.active {
+  background: #c0ffff;
+}
+
+/* ================= CARD BODY ================= */
+.card-body {
+  padding: 22px 18px;
+  text-align: center;
+}
+
+.name-pair {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.rank-badge {
+  width: 60px;
+  height: 60px;
+  margin: auto;
+  border-radius: 50%;
+  background: #598bff;
+  color: white;
+  font-size: 22px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  50% { transform: translateY(-4px); }
+}
+
+/* ================= FOOTER (CUTE STYLE) ================= */
+.sponsor-footer {
+  font-family: "Cherry Swash", "Fredoka One", "Patrick Hand", sans-serif;
+  margin-top: 60px;
+  padding: 40px 16px 50px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(6px);
+  border-radius: 20px 20px 0 0;
+  color: white;
+}
+
+.sponsor-container {
+  max-width: 420px;
+  margin: auto;
+  text-align: center;
+}
+
+.sponsor-label {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 22px;
+}
+
+.other-label {
+  margin-top: 50px;
+}
+
+/* ================= MAIN SPONSORS ================= */
+.sponsor-logos {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.sponsor-logos img {
+  width: 65px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 25px;
+  transition: transform 0.3s ease;
+}
+
+.sponsor-logos img:hover {
+  transform: translateY(-4px) scale(1.05);
+}
+
+/* ================= ARTIST SPONSORS (LEFT-RIGHT WITH ICONS) ================= */
+.sponsor-names.elegant .sponsor-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+}
+
+.sponsor-names.elegant .sponsor-row:hover {
+  background: rgba(0, 0, 1, 0.25);
+}
+
+/* Left side: icon + role */
+.sponsor-names.elegant .sponsor-role {
+  font-weight: 200;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-align: left;
+}
+
+/* Right side: sponsor name */
+.sponsor-names.elegant .sponsor-name {
+  font-weight: 200;
+  text-align: right;
+}
