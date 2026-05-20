@@ -1,59 +1,55 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Campus Voting App (UCSTT Fresher Welcome)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A secure, real-time web application built with the Laravel framework to manage and tally votes during the University of Computer Studies, Thaton (UCSTT) Fresher Welcome King & Queen selection.
 
-## About Laravel
+## ☁️ Production & Cloud Deployment
+This system was successfully deployed online using **AWS (Amazon Web Services)** to handle live, concurrent vote casting from the student body during the actual campus event. It successfully managed real-time traffic and data processing under live production conditions.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🛠️ Tech Stack
+* **Framework:** PHP (Laravel)
+* **Database:** MySQL / MariaDB
+* **Frontend:** HTML, CSS, JavaScript
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📊 Database Structure & Rules
+The application relies on a structured relational database schema (`voting.sql`) designed for high data integrity:
+* **`users`**: Manages authorized student voters using secure, unique `login_code` credentials. It tracks voting status via flags (`kflag`, `qflag`) and timestamps (`kvoting_time`, `qvoting_time`) to strictly enforce a one-time-only voting policy.
+* **`selection`**: Contains rich contestant profile data including names, hometowns, zodiac signs, hobbies, and physical attributes.
+* **`images`**: Handles relational mapping for multiple contestant profile photos (`Images/Selections/`).
+* **`vote`**: Tracks live, dynamic vote tallies linked directly to contestant IDs.
+* **`cache` & `sessions`**: Laravel-backed tables utilized to handle concurrent session traffic smoothly during the peak voting hours.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🚀 Local Installation Guide
 
-## Learning Laravel
+### 1. Prerequisites
+* **XAMPP** (with PHP 8.2+ and MySQL)
+* **Composer** (installed globally on your machine)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 2. Database Setup
+1. Open XAMPP and start **Apache** and **MySQL**.
+2. Go to **phpMyAdmin** (`http://localhost/phpmyadmin`) and create a new database named `voting`.
+3. Select your new `voting` database, go to the **Import** tab, choose the `voting.sql` file from this project, and click **Import**.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 3. Application Setup
+1. Open your terminal inside the project root directory.
+2. Install the framework dependencies:
+   ```bash
+   composer install
 
-## Laravel Sponsors
+4. Create your environment configuration file:
+copy .env.example .env
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+5.Configure your database connection inside the .env file
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=voting
+DB_USERNAME=root
+DB_PASSWORD=
 
-### Premium Partners
+Generate your application encryption key:
+php artisan key:generate
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Running the App Locally
+php artisan serve
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+[http://127.0.0.1:8000](http://127.0.0.1:8000)
